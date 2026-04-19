@@ -1,0 +1,154 @@
+<div class="row g-4">
+
+  <!-- CREATE FREELANCER -->
+  <div class="col-lg-5">
+    <section class="card border-0 rounded-4 p-4 neon-glass float-card">
+      <h2 class="h5 mb-3 neon-purple">
+        Create Freelancer
+      </h2>
+
+      <form [formGroup]="freelancerForm"
+            (ngSubmit)="createFreelancer()">
+
+        <div class="mb-3">
+          <label class="form-label text-light">Name</label>
+          <input class="form-control dark-input"
+                 formControlName="name">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-light">Email</label>
+          <input class="form-control dark-input"
+                 formControlName="email">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-light">Password</label>
+          <input type="password"
+                 class="form-control dark-input"
+                 formControlName="password">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-light">Profile Title</label>
+          <input class="form-control dark-input"
+                 formControlName="profileTitle">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-light">Experience</label>
+          <input class="form-control dark-input"
+                 formControlName="experience">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-light">Hourly Rate</label>
+          <input type="number"
+                 class="form-control dark-input"
+                 formControlName="hourlyRate">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-light">Location</label>
+          <input class="form-control dark-input"
+                 formControlName="location">
+        </div>
+
+        <div class="form-check mb-3">
+          <input type="checkbox"
+                 class="form-check-input"
+                 id="available"
+                 formControlName="available">
+          <label for="available"
+                 class="form-check-label text-light">
+            Available
+          </label>
+        </div>
+
+        <button class="btn btn-purple w-100 neon-btn"
+                [disabled]="freelancerForm.invalid">
+          Save Freelancer
+        </button>
+      </form>
+    </section>
+  </div>
+
+  <!-- FREELANCERS LIST -->
+  <div class="col-lg-7">
+
+    <section class="card border-0 rounded-4 p-4 neon-glass float-card">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h5 mb-0 neon-purple">
+          Freelancers
+        </h2>
+        <button class="btn btn-outline-purple neon-outline btn-sm"
+                (click)="loadFreelancers()">
+          Refresh
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-dark table-hover fancy-table align-middle">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Title</th>
+              <th>Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let freelancer of freelancers">
+              <td>{{ freelancer.freelancerId }}</td>
+              <td>{{ freelancer.name }}</td>
+              <td>{{ freelancer.email }}</td>
+              <td>{{ freelancer.profileTitle }}</td>
+              <td>{{ freelancer.hourlyRate }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="small text-danger mb-0">
+        {{ errorMessage }}
+      </p>
+    </section>
+
+    <!-- MATCHED JOBS -->
+    <section class="card border-0 rounded-4 p-4 neon-glass float-card mt-4">
+      <h2 class="h5 mb-3 neon-purple">
+        Job Matches by Freelancer ID
+      </h2>
+
+      <div class="input-group mb-3">
+        <input class="form-control dark-input"
+               type="number"
+               [(ngModel)]="matchFreelancerId"
+               placeholder="Enter freelancer ID">
+        <button class="btn btn-outline-purple neon-outline"
+                (click)="loadMatchedJobs()">
+          Find Jobs
+        </button>
+      </div>
+
+      <ul class="list-group list-group-dark">
+        <li class="list-group-item dark-list"
+            *ngFor="let job of matchedJobs">
+          <strong class="text-light">
+            {{ job.title }}
+          </strong>
+          <span class="text-secondary">
+            — {{ job.location }} — {{ job.employmentType }}
+          </span>
+        </li>
+      </ul>
+
+      <p class="small text-secondary mt-2 mb-0"
+         *ngIf="!matchedJobs.length">
+        No matched jobs loaded yet.
+      </p>
+    </section>
+
+  </div>
+</div>

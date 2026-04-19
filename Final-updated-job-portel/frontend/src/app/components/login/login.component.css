@@ -1,0 +1,58 @@
+/* FULL DARK BACKGROUND */
+.dark-bg {
+  background: radial-gradient(circle at top, #14002b, #07010f);
+}
+
+/* GLASS CARD */
+.cyber-glass {
+  background: rgba(10, 6, 24, 0.96);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 0 55px rgba(157,78,221,0.45);
+  transition: all 0.4s ease;
+}
+
+/* FLOAT */
+.hover-float:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 0 80px rgba(199,125,255,0.8);
+}
+
+/* TITLE */
+.cyber-title {
+  color: #c77dff;
+  text-shadow: 0 0 20px rgba(199,125,255,1);
+}
+
+/* INPUTS */
+.cyber-input {
+  background: #0f0822;
+  border: 1px solid #5a189a;
+  color: #ffffff;
+}
+
+.cyber-input:focus {
+  border-color: #c77dff;
+  box-shadow: 0 0 16px rgba(199,125,255,1);
+}
+
+/* BUTTON */
+.cyber-btn {
+  background: linear-gradient(135deg, #9d4edd, #5a189a);
+  border: none;
+  color: white;
+}
+
+.cyber-btn:hover {
+  box-shadow: 0 0 30px rgba(199,125,255,1);
+  transform: scale(1.05);
+}
+
+/* LINKS */
+.neon-link {
+  color: #c77dff;
+  text-decoration: none;
+}
+
+.neon-link:hover {
+  text-shadow: 0 0 12px #c77dff;
+}

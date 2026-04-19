@@ -1,0 +1,95 @@
+/* GLOBAL DARK BACKGROUND */
+.cyber-bg {
+  background: radial-gradient(circle at top, #12001f, #050009);
+  color: white !important;
+}
+
+/* NAVBAR */
+.cyber-navbar {
+  background: rgba(10, 2, 25, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(157,78,221,0.4);
+  box-shadow: 0 0 30px rgba(157,78,221,0.3);
+}
+
+.nav-link-cyber {
+  color: #c9c9ff;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.nav-link-cyber:hover {
+  color: #c77dff;
+  text-shadow: 0 0 12px #c77dff;
+}
+
+.nav-link-cyber.danger:hover {
+  color: #ff4b4b;
+  text-shadow: 0 0 12px #ff4b4b;
+}
+
+/* CYBER TITLE */
+.neon-purple {
+  color: #c77dff !important;
+  text-shadow: 0 0 18px rgba(199,125,255,1);
+}
+
+/* CYBER CARDS */
+.cyber-card {
+  background: rgba(12, 8, 30, 0.95);
+  backdrop-filter: blur(15px);
+  border-radius: 1rem;
+  box-shadow: 0 0 45px rgba(157,78,221,0.3);
+  transition: all 0.35s ease;
+}
+
+.cyber-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 60px rgba(199,125,255,0.6);
+}
+
+/* INPUTS */
+.cyber-input {
+  background: #120a24 !important;
+  border: 1px solid #5a189a;
+  color: white !important;
+}
+
+.cyber-input:focus {
+  box-shadow: 0 0 16px rgba(199,125,255,0.9);
+  border-color: #c77dff;
+}
+
+/* BUTTONS */
+.cyber-btn {
+  background: linear-gradient(135deg,#9d4edd,#5a189a);
+  border: none;
+  color: #fff;
+}
+
+.cyber-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(199,125,255,1);
+}
+
+.cyber-outline {
+  border: 1px solid #c77dff;
+  color: #c77dff !important;
+  background: transparent;
+}
+
+.cyber-outline:hover {
+  background: rgba(157,78,221,0.25);
+}
+
+/* TABLE */
+.cyber-table tbody tr:hover {
+  background: rgba(157,78,221,0.2) !important;
+}
+
+/* FOOTER */
+.cyber-footer {
+  background: rgba(10, 2, 25, 0.9);
+  border-top: 1px solid rgba(157,78,221,0.4);
+  box-shadow: 0 0 25px rgba(157,78,221,0.3);
+}

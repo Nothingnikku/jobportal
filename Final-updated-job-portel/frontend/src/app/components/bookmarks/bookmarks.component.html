@@ -1,0 +1,155 @@
+<div class="row g-4" *ngIf="isFreelancer; else recruiterView">
+
+  <!-- FREELANCER : SAVED JOBS -->
+  <div class="col-12">
+    <section class="card border-0 rounded-4 p-4 neon-glass float-card">
+      <h2 class="h5 mb-3 neon-purple">
+        Saved Jobs
+      </h2>
+
+      <div *ngIf="savedJobs.length === 0"
+           class="text-secondary">
+        No saved jobs yet.
+      </div>
+
+      <div class="table-responsive"
+           *ngIf="savedJobs.length > 0">
+        <table class="table table-dark table-hover fancy-table align-middle">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Location</th>
+              <th>Type</th>
+              <th>Budget</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let job of savedJobs">
+              <td class="fw-semibold">{{ job.title }}</td>
+              <td>{{ job.location }}</td>
+              <td>{{ job.employmentType }}</td>
+              <td>{{ job.budget }}</td>
+              <td class="text-end">
+                <button class="btn btn-sm btn-outline-danger neon-outline"
+                        (click)="removeSaved(job.jobId)">
+                  Remove
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ================= RECRUITER VIEW ================= -->
+<ng-template #recruiterView>
+
+<div class="row g-4">
+
+  <!-- BOOKMARK FREELANCER -->
+  <div class="col-lg-5">
+    <section class="card border-0 rounded-4 p-4 neon-glass float-card">
+      <h2 class="h5 mb-3 neon-purple">
+        Bookmark Freelancer
+      </h2>
+
+      <form [formGroup]="bookmarkForm"
+            (ngSubmit)="bookmarkFreelancer()">
+
+        <div class="mb-3">
+          <label class="form-label text-light">
+            Recruiter ID
+          </label>
+          <input class="form-control dark-input"
+                 type="number"
+                 formControlName="recruiterId">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-light">
+            Freelancer ID
+          </label>
+          <input class="form-control dark-input"
+                 type="number"
+                 formControlName="freelancerId">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-light">
+            Skill ID (optional)
+          </label>
+          <input class="form-control dark-input"
+                 type="number"
+                 formControlName="skillId">
+        </div>
+
+        <button class="btn btn-purple w-100 neon-btn"
+                [disabled]="bookmarkForm.invalid">
+          Save Bookmark
+        </button>
+      </form>
+
+      <div class="alert alert-success py-2 mt-3 mb-0"
+           *ngIf="outputText">
+        {{ outputText }}
+      </div>
+    </section>
+  </div>
+
+  <!-- VIEW BOOKMARKS -->
+  <div class="col-lg-7">
+    <section class="card border-0 rounded-4 p-4 neon-glass float-card">
+      <h2 class="h5 mb-3 neon-purple">
+        View Bookmarks by Recruiter
+      </h2>
+
+      <div class="input-group mb-3">
+        <input class="form-control dark-input"
+               type="number"
+               [(ngModel)]="recruiterSearchId"
+               placeholder="Recruiter ID">
+        <button class="btn btn-outline-purple neon-outline"
+                (click)="loadBookmarks()">
+          Load
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-dark table-hover fancy-table align-middle">
+          <thead>
+            <tr>
+              <th>Bookmark ID</th>
+              <th>Freelancer</th>
+              <th>Skill</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bookmark of bookmarks">
+              <td>{{ bookmark.id }}</td>
+              <td>
+                {{ bookmark.freelancer?.name || '-' }}
+                <span class="text-secondary">
+                  (ID: {{ bookmark.freelancer?.freelancerId || '-' }})
+                </span>
+              </td>
+              <td>
+                <span class="badge bg-info text-dark px-3">
+                  {{ bookmark.skill?.name || '-' }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="small text-danger mb-0">
+        {{ errorMessage }}
+      </p>
+    </section>
+  </div>
+
+</div>
+</ng-template>

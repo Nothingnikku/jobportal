@@ -1,0 +1,71 @@
+/* GLASS PANELS */
+.purple-glass {
+  background: linear-gradient(135deg, #240046, #3c096c);
+  box-shadow: 0 0 50px rgba(157,78,221,0.5);
+}
+
+.dark-glass {
+  background: rgba(15, 10, 30, 0.9);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 40px rgba(157,78,221,0.25);
+}
+
+/* TEXT */
+.neon-purple {
+  color: #c77dff;
+  text-shadow: 0 0 15px rgba(199,125,255,1);
+}
+
+/* INPUTS */
+.dark-input {
+  background: #0f0a1e;
+  border: 1px solid #5a189a;
+  color: #fff;
+}
+
+.dark-input:focus {
+  box-shadow: 0 0 10px rgba(199,125,255,0.8);
+  border-color: #c77dff;
+}
+
+/* BUTTONS */
+.btn-purple {
+  background: linear-gradient(135deg, #9d4edd, #5a189a);
+  color: white;
+  border: none;
+}
+
+.btn-outline-purple {
+  border: 1px solid #9d4edd;
+  color: #c77dff;
+}
+
+.neon-btn:hover,
+.neon-outline:hover {
+  box-shadow: 0 0 20px rgba(199,125,255,1);
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* ANIMATIONS */
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.fade-in-left {
+  animation: fadeLeft 1s ease forwards;
+}
+
+.float-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 60px rgba(199,125,255,0.6);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}

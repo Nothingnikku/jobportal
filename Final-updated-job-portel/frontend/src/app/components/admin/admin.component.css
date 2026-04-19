@@ -1,0 +1,44 @@
+
+/* Glassmorphism Card */
+.fancy-card {
+  background: rgba(20, 20, 30, 0.85);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 0 30px rgba(6, 68, 86, 0.08);
+  transition: all 0.35s ease;
+}
+
+.hover-glow:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 0 40px rgba(0, 198, 255, 0.25);
+}
+
+/* Neon title */
+.text-neon {
+  color: #170225;
+  text-shadow: 0 0 12px rgba(0, 242, 255, 0.6);
+}
+
+/* Fancy tables */
+.fancy-table tbody tr:hover {
+  background: rgba(0, 242, 255, 0.06);
+}
+
+/* Button glow */
+.glow-green:hover {
+  box-shadow: 0 0 12px rgba(25, 135, 84, 0.9);
+}
+
+.glow-red:hover {
+  box-shadow: 0 0 12px rgba(220, 53, 69, 0.9);
+}
+
+/* Pulse animation */
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 rgba(25,135,84,0.6); }
+  70% { box-shadow: 0 0 14px rgba(25,135,84,0.9); }
+  100% { box-shadow: 0 0 0 rgba(25,135,84,0.6); }
+}

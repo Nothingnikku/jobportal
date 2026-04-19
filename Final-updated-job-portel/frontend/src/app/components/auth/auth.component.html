@@ -1,0 +1,177 @@
+<div class="row g-4 align-items-stretch">
+
+  <!-- LEFT INFO PANEL -->
+  <div class="col-lg-5">
+    <section class="card border-0 rounded-4 h-100 purple-glass glow-panel">
+      <div class="card-body p-4 p-lg-5 d-flex flex-column justify-content-between text-white">
+
+        <div class="fade-in-left">
+          <h2 class="fw-bold mb-3 neon-purple">
+            Welcome to SkillBridge
+          </h2>
+
+          <p class="text-white-50 mb-4">
+            Connect with opportunities and manage your hiring journey with a
+            next‑generation professional workflow.
+          </p>
+
+          <ul class="list-unstyled small mb-0">
+            <li class="mb-2">⚡ Create a profile & discover roles faster</li>
+            <li class="mb-2">⚡ Publish listings & manage applicants</li>
+            <li class="mb-2">⚡ Everything organized in one dashboard</li>
+          </ul>
+        </div>
+
+        <a routerLink="/" class="btn btn-outline-light mt-4 neon-outline">
+          ← Back to Home
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- RIGHT FORM PANEL -->
+  <div class="col-lg-7">
+    <section class="card border-0 rounded-4 h-100 dark-glass float-card">
+      <div class="card-body p-4 p-lg-5">
+
+        <!-- MODE SWITCH -->
+        <div class="d-flex gap-2 mb-4">
+          <button class="btn btn-sm"
+            [class.btn-purple]="mode==='login'"
+            [class.btn-outline-purple]="mode!=='login'"
+            (click)="mode='login'">
+            Login
+          </button>
+
+          <button class="btn btn-sm"
+            [class.btn-purple]="mode==='signup'"
+            [class.btn-outline-purple]="mode!=='signup'"
+            (click)="mode='signup'">
+            Signup
+          </button>
+        </div>
+
+        <!-- LOGIN -->
+        <div *ngIf="mode==='login'" class="fade-in">
+          <h2 class="h5 mb-3 fw-semibold neon-purple">
+            Login
+          </h2>
+
+          <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+            <div class="mb-3">
+              <label class="form-label text-light">Email</label>
+              <input class="form-control dark-input" formControlName="email">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-light">Password</label>
+              <input type="password" class="form-control dark-input" formControlName="password">
+
+              <div class="text-danger small mt-1"
+                *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['minlength']">
+                Password must be at least 6 characters.
+              </div>
+            </div>
+
+            <button class="btn btn-purple w-100 neon-btn"
+              [disabled]="loginForm.invalid">
+              Login
+            </button>
+          </form>
+
+          <div class="alert alert-success mt-3 py-2" *ngIf="loginSuccess">
+            {{ loginSuccess }}
+          </div>
+
+          <div class="alert alert-danger mt-3 py-2" *ngIf="loginError">
+            {{ loginError }}
+          </div>
+        </div>
+
+        <!-- SIGNUP -->
+        <div *ngIf="mode==='signup'" class="fade-in">
+          <h2 class="h5 mb-3 fw-semibold neon-purple">
+            Signup
+          </h2>
+
+          <p class="small text-secondary">
+            Only Recruiter & Freelancer signup is allowed.
+          </p>
+
+          <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+
+            <div class="mb-3">
+              <label class="form-label text-light">Name</label>
+              <input class="form-control dark-input" formControlName="name">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-light">Email</label>
+              <input class="form-control dark-input" formControlName="email">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-light">Password</label>
+              <input type="password" class="form-control dark-input" formControlName="password">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-light">Phone</label>
+              <input class="form-control dark-input" formControlName="phone">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-light">Role</label>
+              <select class="form-select dark-input" formControlName="role">
+                <option value="FREELANCER">FREELANCER</option>
+                <option value="RECRUITER">RECRUITER</option>
+              </select>
+            </div>
+
+            <div class="mb-3" *ngIf="roleValue === 'RECRUITER'">
+              <label class="form-label text-light">Company</label>
+              <input class="form-control dark-input" formControlName="company">
+            </div>
+
+            <div *ngIf="roleValue === 'FREELANCER'">
+              <div class="mb-3">
+                <label class="form-label text-light">Profile Title</label>
+                <input class="form-control dark-input" formControlName="profileTitle">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label text-light">Experience</label>
+                <input class="form-control dark-input" formControlName="experience">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label text-light">Hourly Rate</label>
+                <input type="number" class="form-control dark-input" formControlName="hourlyRate">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label text-light">Location</label>
+                <input class="form-control dark-input" formControlName="location">
+              </div>
+            </div>
+
+            <button class="btn btn-purple w-100 neon-btn"
+              [disabled]="signupForm.invalid">
+              Create Account
+            </button>
+          </form>
+
+          <div class="alert alert-success mt-3 py-2" *ngIf="successMessage">
+            {{ successMessage }}
+          </div>
+
+          <div class="alert alert-danger mt-3 py-2" *ngIf="errorMessage">
+            {{ errorMessage }}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</div>

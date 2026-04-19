@@ -1,0 +1,220 @@
+<!-- ADMIN DASHBOARD -->
+<section class="card border-0 rounded-4 shadow-lg mb-4 fancy-card hover-glow">
+  <div class="card-body p-4">
+    <h2 class="fw-bold text-neon mb-1">Admin Dashboard</h2>
+    <p class="text-secondary mb-0">
+      Manage recruiters, freelancers, jobs and applications
+    </p>
+  </div>
+</section>
+
+<div class="row g-4">
+
+<!-- PENDING RECRUITERS -->
+<div class="col-lg-6">
+<section class="card border-0 rounded-4 fancy-card hover-glow">
+<div class="card-body p-4">
+<div class="d-flex justify-content-between mb-3">
+<h6 class="text-info text-uppercase">Pending Recruiters</h6>
+<button class="btn btn-outline-info btn-sm" (click)="loadPendingRecruiters()">Refresh</button>
+</div>
+
+<table class="table table-dark table-hover fancy-table">
+<thead>
+<tr>
+<th>ID</th><th>Name</th><th>Company</th><th></th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let recruiter of pendingRecruiters">
+<td>{{ recruiter.recruiterId }}</td>
+<td>{{ recruiter.name }}</td>
+<td>{{ recruiter.company }}</td>
+<td class="text-end">
+<button class="btn btn-success btn-sm me-2 glow-green"
+(click)="approveRecruiter(recruiter.recruiterId)">Approve</button>
+<button class="btn btn-outline-danger btn-sm glow-red"
+(click)="rejectRecruiter(recruiter.recruiterId)">Reject</button>
+</td>
+</tr>
+</tbody>
+</table>
+
+<div *ngIf="!pendingRecruiters.length"
+class="alert alert-dark border border-secondary">No pending recruiters</div>
+</div>
+</section>
+</div>
+
+<!-- ALL RECRUITERS -->
+<div class="col-lg-6">
+<section class="card border-0 rounded-4 fancy-card hover-glow">
+<div class="card-body p-4">
+<div class="d-flex justify-content-between mb-3">
+<h6 class="text-primary text-uppercase">All Recruiters</h6>
+<button class="btn btn-outline-primary btn-sm" (click)="loadAllRecruiters()">Refresh</button>
+</div>
+
+<table class="table table-dark table-hover fancy-table">
+<thead>
+<tr>
+<th>ID</th><th>Name</th><th>Email</th><th>Status</th><th></th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let recruiter of recruiters">
+<td>{{ recruiter.recruiterId }}</td>
+<td>{{ recruiter.name }}</td>
+<td>{{ recruiter.email }}</td>
+<td>
+<span class="badge rounded-pill px-3 py-2"
+[class.bg-success]="recruiter.verified"
+[class.bg-warning]="!recruiter.verified"
+[class.pulse]="recruiter.verified">
+{{ recruiter.verified ? 'Approved' : 'Pending' }}
+</span>
+</td>
+<td class="text-end">
+<button class="btn btn-outline-danger btn-sm glow-red"
+(click)="deleteRecruiter(recruiter.recruiterId)">Delete</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</div>
+
+<!-- FREELANCERS -->
+<div class="row g-4 mt-2">
+
+<div class="col-lg-6">
+<section class="card border-0 rounded-4 fancy-card hover-glow">
+<div class="card-body p-4">
+<div class="d-flex justify-content-between mb-3">
+<h6 class="text-info text-uppercase">Pending Freelancers</h6>
+<button class="btn btn-outline-info btn-sm" (click)="loadPendingFreelancers()">Refresh</button>
+</div>
+
+<table class="table table-dark table-hover fancy-table">
+<thead>
+<tr>
+<th>ID</th><th>Name</th><th>Email</th><th></th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let freelancer of pendingFreelancers">
+<td>{{ freelancer.freelancerId }}</td>
+<td>{{ freelancer.name }}</td>
+<td>{{ freelancer.email }}</td>
+<td class="text-end">
+<button class="btn btn-success btn-sm me-2 glow-green"
+(click)="approveFreelancer(freelancer.freelancerId)">Approve</button>
+<button class="btn btn-outline-danger btn-sm glow-red"
+(click)="rejectFreelancer(freelancer.freelancerId)">Reject</button>
+</td>
+</tr>
+</tbody>
+</table>
+
+<div *ngIf="!pendingFreelancers.length"
+class="alert alert-dark border border-secondary">No pending freelancers</div>
+</div>
+</section>
+</div>
+
+<div class="col-lg-6">
+<section class="card border-0 rounded-4 fancy-card hover-glow">
+<div class="card-body p-4">
+<div class="d-flex justify-content-between mb-3">
+<h6 class="text-primary text-uppercase">All Freelancers</h6>
+<button class="btn btn-outline-primary btn-sm" (click)="loadFreelancers()">Refresh</button>
+</div>
+
+<table class="table table-dark table-hover fancy-table">
+<thead>
+<tr>
+<th>ID</th><th>Name</th><th>Email</th><th>Title</th><th>Rate</th><th></th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let freelancer of freelancers">
+<td>{{ freelancer.freelancerId }}</td>
+<td>{{ freelancer.name }}</td>
+<td>{{ freelancer.email }}</td>
+<td>{{ freelancer.profileTitle }}</td>
+<td>{{ freelancer.hourlyRate }}</td>
+<td class="text-end">
+<button class="btn btn-outline-danger btn-sm glow-red"
+(click)="deleteFreelancer(freelancer.freelancerId)">Delete</button>
+</td>
+</tr>
+</tbody>
+</table>
+
+<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+</div>
+</section>
+</div>
+</div>
+
+<!-- JOBS -->
+<section class="card border-0 rounded-4 fancy-card hover-glow mt-4">
+<div class="card-body p-4">
+<div class="d-flex justify-content-between mb-3">
+<h6 class="text-warning text-uppercase">All Jobs</h6>
+<button class="btn btn-outline-warning btn-sm"
+(click)="loadJobs()">Refresh</button>
+</div>
+
+<table class="table table-dark table-hover fancy-table">
+<thead>
+<tr>
+<th>ID</th><th>Title</th><th>Type</th><th>Budget</th><th></th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let job of jobs">
+<td>{{ job.jobId }}</td>
+<td>{{ job.title }}</td>
+<td>{{ job.employmentType }}</td>
+<td>{{ job.budget }}</td>
+<td class="text-end">
+<button class="btn btn-outline-danger btn-sm glow-red"
+(click)="deleteJob(job.jobId)">Delete</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- APPLICATIONS -->
+<section class="card border-0 rounded-4 fancy-card hover-glow mt-4">
+<div class="card-body p-4">
+<div class="d-flex justify-content-between mb-3">
+<h6 class="text-success text-uppercase">Job Applications</h6>
+<button class="btn btn-outline-success btn-sm"
+(click)="loadApplications()">Refresh</button>
+</div>
+
+<table class="table table-dark table-hover fancy-table">
+<thead>
+<tr>
+<th>ID</th><th>Job</th><th>Freelancer</th><th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let app of applications">
+<td>{{ app.applicationId }}</td>
+<td>{{ app.job?.jobId }}</td>
+<td>{{ app.freelancer?.freelancerId }}</td>
+<td>
+<span class="badge bg-info text-dark px-3 py-2">{{ app.status }}</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>

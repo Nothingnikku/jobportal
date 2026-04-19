@@ -1,0 +1,154 @@
+<div class="row g-4">
+
+  <!-- REGISTER & LOGIN -->
+  <div class="col-lg-6">
+
+    <!-- REGISTER RECRUITER -->
+    <section class="card cyber-glass p-4 hover-float mb-4">
+      <h2 class="h5 neon-purple mb-3">⚡ Register Recruiter</h2>
+
+      <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+        <div class="mb-3">
+          <label class="form-label text-light">Name</label>
+          <input class="form-control cyber-input" formControlName="name">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-light">Email</label>
+          <input class="form-control cyber-input" formControlName="email">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-light">Password</label>
+          <input type="password" class="form-control cyber-input" formControlName="password">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-light">Company</label>
+          <input class="form-control cyber-input" formControlName="company">
+        </div>
+
+        <button class="btn cyber-btn w-100"
+                [disabled]="registerForm.invalid">
+          Create Recruiter
+        </button>
+      </form>
+    </section>
+
+    <!-- LOGIN RECRUITER -->
+    <section class="card cyber-glass p-4 hover-float">
+      <h2 class="h5 neon-purple mb-3">🔐 Recruiter Login</h2>
+
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+        <div class="mb-3">
+          <label class="form-label text-light">Email</label>
+          <input class="form-control cyber-input" formControlName="email">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-light">Password</label>
+          <input type="password" class="form-control cyber-input" formControlName="password">
+        </div>
+
+        <button class="btn cyber-outline w-100"
+                [disabled]="loginForm.invalid">
+          Login
+        </button>
+      </form>
+
+      <p class="small text-secondary mt-3 mb-0">
+        If login fails, recruiter may be pending admin approval.
+      </p>
+
+      <div class="alert alert-success py-2 mt-3" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+
+      <div class="alert alert-danger py-2 mt-3" *ngIf="loginError">
+        {{ loginError }}
+      </div>
+    </section>
+
+  </div>
+
+  <!-- RIGHT SIDE: RECRUITERS + JOBS FETCH -->
+  <div class="col-lg-6">
+
+    <!-- RECRUITER LIST -->
+    <section class="card cyber-glass p-4 hover-float">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h5 neon-purple mb-0">📋 Recruiters</h2>
+        <button class="btn btn-sm cyber-outline" (click)="loadRecruiters()">
+          Refresh
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-dark table-hover cyber-table align-middle">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Company</th>
+              <th>Verified</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let recruiter of recruiters">
+              <td>{{ recruiter.recruiterId }}</td>
+              <td>{{ recruiter.name }}</td>
+              <td>{{ recruiter.email }}</td>
+              <td>{{ recruiter.company }}</td>
+              <td>
+                <span class="badge"
+                  [class.bg-success]="recruiter.verified"
+                  [class.bg-danger]="!recruiter.verified">
+                  {{ recruiter.verified ? 'Yes' : 'No' }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="small text-danger mb-0">{{ errorMessage }}</p>
+    </section>
+
+    <!-- FETCH JOBS BY RECRUITER -->
+    <section class="card cyber-glass p-4 hover-float mt-4">
+      <h2 class="h5 neon-purple mb-3">🎯 Jobs by Recruiter ID</h2>
+
+      <div class="input-group mb-3">
+        <input class="form-control cyber-input"
+               type="number"
+               [(ngModel)]="selectedRecruiterId"
+               placeholder="Enter recruiter ID">
+
+        <button class="btn cyber-outline"
+                (click)="loadRecruiterJobs()">
+          Fetch Jobs
+        </button>
+      </div>
+
+      <ul class="list-group">
+        <li class="list-group-item dark-list"
+            *ngFor="let job of recruiterJobs">
+          <strong class="text-light">{{ job.title }}</strong>
+          <span class="text-secondary">
+            — {{ job.location }} — {{ job.employmentType }}
+          </span>
+        </li>
+      </ul>
+
+      <p class="small text-secondary mt-3 mb-0"
+         *ngIf="!recruiterJobs.length">
+        No recruiter jobs loaded yet.
+      </p>
+    </section>
+
+  </div>
+
+</div>

@@ -1,0 +1,32 @@
+<div class="bg-body-tertiary min-vh-100">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+    <div class="container-xl">
+      <a class="navbar-brand fw-semibold" routerLink="/">SkillBridge</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="topNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3">
+          <li class="nav-item"><a class="nav-link" routerLink="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/" fragment="categories">Popular Categories</a></li>
+          <li class="nav-item" *ngIf="auth.currentSession?.role === 'FREELANCER'">
+            <a class="nav-link" routerLink="/freelancer-dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item" *ngIf="auth.currentSession?.role === 'RECRUITER'">
+            <a class="nav-link" routerLink="/recruiter-dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item" *ngIf="auth.currentSession?.role === 'ADMIN'">
+            <a class="nav-link" routerLink="/admin">Dashboard</a>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center">
+          <a routerLink="/login" class="btn btn-outline-light" *ngIf="!auth.currentSession">Login</a>
+          <a routerLink="/signup" class="btn btn-primary ms-2" *ngIf="!auth.currentSession">Signup</a>
+          <button class="btn btn-outline-light" *ngIf="auth.currentSession" (click)="logout()">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <router-outlet></router-outlet>
+</div>

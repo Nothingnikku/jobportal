@@ -1,0 +1,78 @@
+/* GLASS */
+.neon-glass {
+  background: rgba(12, 8, 24, 0.95);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 0 40px rgba(157,78,221,0.35);
+  transition: all 0.4s ease;
+}
+
+/* FLOAT */
+.float-card:hover {
+  transform: translateY(-10px) scale(1.01);
+  box-shadow: 0 0 60px rgba(199,125,255,0.6);
+}
+
+/* TITLES */
+.neon-purple {
+  color: #c77dff;
+  text-shadow: 0 0 18px rgba(199,125,255,1);
+}
+
+/* JOB CARD */
+.job-card {
+  background: rgba(20, 15, 40, 0.9);
+  border-radius: 1rem;
+  padding: 1rem;
+  transition: all 0.35s ease;
+}
+
+.job-card:hover {
+  background: rgba(36, 20, 68, 0.95);
+  transform: scale(1.02);
+  box-shadow: 0 0 35px rgba(157,78,221,0.5);
+}
+
+/* INPUT */
+.dark-input {
+  background: #120a24;
+  border: 1px solid #5a189a;
+  color: #fff;
+}
+
+.dark-input:focus {
+  border-color: #c77dff;
+  box-shadow: 0 0 12px rgba(199,125,255,0.8);
+}
+
+/* BUTTONS */
+.btn-purple {
+  background: linear-gradient(135deg, #9d4edd, #5a189a);
+  color: white;
+  border: none;
+}
+
+.btn-outline-purple {
+  border: 1px solid #9d4edd;
+  color: #c77dff;
+}
+
+.neon-btn:hover,
+.neon-outline:hover {
+  box-shadow: 0 0 25px rgba(199,125,255,1);
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* TABLE */
+.fancy-table tbody tr:hover {
+  background: rgba(157,78,221,0.2);
+}
+
+/* ANIMATION */
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

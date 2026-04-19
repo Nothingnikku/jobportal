@@ -1,0 +1,104 @@
+<!-- HERO SECTION -->
+<section class="hero-dark text-white text-center py-5">
+  <div class="container">
+    <h1 class="display-5 fw-bold mb-3 glow-text fade-in">
+      Find work. Hire talent. Move faster.
+    </h1>
+    <p class="lead mb-4 text-light opacity-75 slide-up">
+      Connect recruiters and freelancers in one powerful platform.
+    </p>
+
+    <div class="d-flex justify-content-center">
+      <div class="input-group input-group-lg hero-search">
+        <input class="form-control rounded-start-pill shadow-none"
+               [(ngModel)]="keyword"
+               placeholder="Search jobs by skill or title">
+        <button class="btn btn-dark rounded-end-pill px-4 neon-btn">
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section id="categories" class="container mt-5 mb-5">
+  <h2 class="h4 fw-semibold text-center mb-5 purple-text fade-in">
+    Popular Categories
+  </h2>
+
+  <div class="row g-4">
+    <div class="col-md-4" *ngFor="let i of [0,1,2,3,4,5]">
+      <div class="card border-0 category-card-dark float-card">
+        <div class="card-body p-4 text-center">
+          <div class="icon-circle mb-3">
+            <i class="bi"
+               [ngClass]="{
+               'bi-code-slash':i==0,
+               'bi-palette':i==1,
+               'bi-megaphone':i==2,
+               'bi-pencil-square':i==3,
+               'bi-graph-up-arrow':i==4,
+               'bi-headset':i==5
+               }">
+            </i>
+          </div>
+
+          <h5 class="fw-semibold mb-1 text-white">
+            {{ ['Development','Design','Marketing','Writing','Data & Analytics','Support'][i] }}
+          </h5>
+          <p class="small text-muted mb-0">
+            {{ ['Web, Mobile, Backend','UI/UX, Graphics','SEO, Ads','Content, Blogs','Reports & Dashboards','Customer Service'][i] }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="container mt-5 mb-5">
+  <div class="cta-dark p-5 rounded-4 text-center glow-border">
+    <h3 class="h4 fw-semibold mb-4 glow-text">
+      Start your journey with SkillBridge today
+    </h3>
+
+    <div class="d-flex flex-wrap gap-3 justify-content-center">
+      <a routerLink="/signup-freelancer"
+         class="btn btn-purple px-4 neon-btn">
+        Signup as Freelancer
+      </a>
+
+      <a routerLink="/signup-recruiter"
+         class="btn btn-outline-purple px-4 neon-outline">
+        Signup as Recruiter
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-dark mt-5 p-4 text-white">
+  <div class="container">
+    <div class="row g-3 text-center text-md-start">
+      <div class="col-md-4">
+        <h6 class="fw-semibold purple-text">About</h6>
+        <p class="small text-white-50 mb-0">
+          SkillBridge connects recruiters and freelancers globally.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h6 class="fw-semibold purple-text">Contact</h6>
+        <p class="small text-white-50 mb-0">
+          supportskillbridge.com
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h6 class="fw-semibold purple-text">Privacy</h6>
+        <p class="small text-white-50 mb-0">
+          Terms & Privacy Policy
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

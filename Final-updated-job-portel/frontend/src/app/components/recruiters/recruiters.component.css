@@ -1,0 +1,69 @@
+/* Background */
+.cyber-bg {
+  background: radial-gradient(circle at top, #0a0016, #05000a);
+}
+
+/* Glass Card */
+.cyber-glass {
+  background: rgba(10, 5, 30, 0.95);
+  backdrop-filter: blur(16px);
+  border-radius: 1rem;
+  box-shadow: 0 0 45px rgba(157,78,221,0.35);
+  transition: all 0.3s ease;
+}
+
+.hover-float:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 70px rgba(199,125,255,0.7);
+}
+
+/* Titles */
+.neon-purple {
+  color: #c77dff;
+  text-shadow: 0 0 15px rgba(199,125,255,1);
+}
+
+/* Input fields */
+.cyber-input {
+  background: #120a24 !important;
+  border: 1px solid #5a189a !important;
+  color: white !important;
+}
+
+.cyber-input:focus {
+  border-color: #c77dff !important;
+  box-shadow: 0 0 15px rgba(199,125,255,1);
+}
+
+/* Buttons */
+.cyber-btn {
+  background: linear-gradient(135deg, #9d4edd, #5a189a);
+  border: none !important;
+  color: white !important;
+}
+
+.cyber-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(199,125,255,1);
+}
+
+.cyber-outline {
+  border: 1px solid #c77dff !important;
+  color: #c77dff !important;
+}
+
+.cyber-outline:hover {
+  background: rgba(157,78,221,0.25) !important;
+}
+
+/* Tables */
+.cyber-table tbody tr:hover {
+  background: rgba(157,78,221,0.25) !important;
+}
+
+/* Dark list items */
+.dark-list {
+  background: rgba(20, 15, 45, 0.95);
+  color: white;
+  border: 1px solid rgba(157,78,221,0.2);
+}

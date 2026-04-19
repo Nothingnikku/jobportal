@@ -1,0 +1,85 @@
+.dark-page {
+  background: radial-gradient(circle at top, #14002b, #07010f);
+}
+
+.neon-glass {
+  background: rgba(15, 10, 30, 0.95);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 45px rgba(157,78,221,0.4);
+}
+
+.float-card {
+  transition: all 0.4s ease;
+}
+.float-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 0 70px rgba(199,125,255,0.7);
+}
+
+.neon-purple {
+  color: #c77dff;
+  text-shadow: 0 0 16px rgba(199,125,255,1);
+}
+
+.nav-neon {
+  color: #ddd;
+  text-decoration: none;
+}
+.nav-neon:hover {
+  color: #c77dff;
+  text-shadow: 0 0 10px #c77dff;
+}
+
+.bg-purple {
+  background: #9d4edd;
+}
+
+.dark-input {
+  background: #120a24;
+  border: 1px solid #5a189a;
+  color: white;
+}
+.dark-input:focus {
+  box-shadow: 0 0 12px rgba(199,125,255,0.9);
+}
+
+.btn-purple {
+  background: linear-gradient(135deg, #9d4edd, #5a189a);
+  border: none;
+  color: white;
+}
+.btn-outline-purple {
+  border: 1px solid #c77dff;
+  color: #c77dff;
+}
+.neon-btn:hover,
+.neon-outline:hover {
+  box-shadow: 0 0 30px rgba(199,125,255,1);
+}
+
+.job-card-dark {
+  background: rgba(25, 18, 50, 0.95);
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.4s ease;
+}
+.job-card-dark:hover {
+  transform: scale(1.02);
+}
+
+.fancy-table tr:hover {
+  background: rgba(157,78,221,0.25);
+}
+
+.navbar-dark-glass {
+  background: linear-gradient(135deg,#0c0317,#1c0533);
+}
+
+.neon-border-bottom {
+  box-shadow: 0 2px 25px rgba(157,78,221,0.6);
+}
+
+.neon-footer {
+  padding: 2rem 0;
+}

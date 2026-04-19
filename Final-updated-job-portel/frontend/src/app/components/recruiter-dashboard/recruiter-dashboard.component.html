@@ -1,0 +1,249 @@
+<div class="min-vh-100 cyber-bg text-white">
+
+  <!-- NAVBAR -->
+  <div class="cyber-navbar d-flex justify-content-between align-items-center px-4 py-3">
+    <div class="fw-semibold neon-purple fs-5">⚡ SkillBridge</div>
+
+    <div class="d-flex align-items-center gap-4">
+      <a class="nav-link-cyber" routerLink="/recruiter-dashboard">Dashboard</a>
+      <a class="nav-link-cyber" href="#post-job">Post Job</a>
+      <a class="nav-link-cyber" href="#my-jobs">My Jobs</a>
+      <a class="nav-link-cyber" href="#applications">Applications</a>
+      <a class="nav-link-cyber danger" (click)="logout()">Logout</a>
+    </div>
+  </div>
+
+  <!-- WELCOME -->
+  <div class="container mt-4 mb-4 fade-in">
+    <h2 class="h4 mb-1 neon-purple">Welcome {{ recruiterName }} 👋</h2>
+    <p class="text-secondary mb-0">Manage your job postings and applicants easily.</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="row g-3 mb-4 container">
+    <div class="col-md-4">
+      <div class="cyber-card text-center p-3">
+        <div class="fs-3 fw-bold">{{ totalJobs }}</div>
+        <div class="text-secondary small">Total Jobs Posted</div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="cyber-card text-center p-3">
+        <div class="fs-3 fw-bold">{{ totalApplications }}</div>
+        <div class="text-secondary small">Total Applications Received</div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="cyber-card text-center p-3">
+        <div class="fs-3 fw-bold">{{ activeJobs }}</div>
+        <div class="text-secondary small">Active Jobs</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POST JOB -->
+  <div class="container mb-4">
+    <section class="cyber-card p-4" id="post-job">
+      <h3 class="h5 neon-purple mb-3">
+        {{ editingJobId ? 'Edit Job' : 'Post New Job' }}
+      </h3>
+
+      <form [formGroup]="jobForm" (ngSubmit)="submitJob()">
+
+        <label class="form-label text-light">Job Title</label>
+        <input class="form-control cyber-input mb-3" formControlName="title">
+
+        <label class="form-label text-light">Job Description</label>
+        <textarea class="form-control cyber-input mb-3"
+                  rows="3"
+                  formControlName="description"></textarea>
+
+        <label class="form-label text-light">Skills</label>
+        <input class="form-control cyber-input mb-3"
+               formControlName="skillsText"
+               placeholder="Java, React, AWS">
+
+        <input class="form-control cyber-input mb-3"
+               placeholder="Location"
+               formControlName="location">
+
+        <input class="form-control cyber-input mb-3"
+               placeholder="Salary"
+               type="number"
+               formControlName="budget">
+
+        <select class="form-control cyber-input mb-3"
+                formControlName="employmentType">
+          <option value="FullTime">Full Time</option>
+          <option value="PartTime">Part Time</option>
+          <option value="Freelance">Freelance</option>
+        </select>
+
+        <div class="d-flex gap-3">
+          <button class="btn cyber-btn"
+                  [disabled]="jobForm.invalid || !recruiterId">
+            {{ editingJobId ? 'Update Job' : 'Post Job' }}
+          </button>
+
+          <button type="button"
+                  class="btn cyber-outline"
+                  *ngIf="editingJobId"
+                  (click)="cancelEdit()">
+            Cancel
+          </button>
+        </div>
+      </form>
+
+      <div class="alert alert-success py-2 mt-3"
+           *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+
+      <div class="alert alert-danger py-2 mt-3"
+           *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+    </section>
+  </div>
+
+  <!-- MY JOBS -->
+  <div class="container mb-4" id="my-jobs">
+    <section class="cyber-card p-4">
+      <h3 class="h5 neon-purple mb-3">My Jobs</h3>
+
+      <div class="table-responsive">
+        <table class="table table-dark table-hover cyber-table">
+          <thead>
+            <tr>
+              <th>Job Title</th>
+              <th>Skills</th>
+              <th>Location</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let job of jobs">
+              <td>{{ job.title }}</td>
+              <td>{{ formatSkills(job.skills) }}</td>
+              <td>{{ job.location }}</td>
+              <td>
+                <span class="badge"
+                  [class.bg-success]="job.active"
+                  [class.bg-danger]="!job.active">
+                  {{ job.active ? 'Active' : 'Paused' }}
+                </span>
+              </td>
+
+              <td>
+                <button class="btn btn-sm cyber-outline me-2"
+                        (click)="startEdit(job)">
+                  Edit
+                </button>
+
+                <button class="btn btn-sm btn-danger"
+                        (click)="deleteJob(job.jobId)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+
+            <tr *ngIf="jobs.length === 0">
+              <td colspan="5" class="text-secondary">
+                No jobs posted yet.
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <!-- APPLICATIONS -->
+  <div class="container mb-4" id="applications">
+    <section class="cyber-card p-4">
+
+      <h3 class="h5 neon-purple mb-3">Applications</h3>
+
+      <div class="table-responsive">
+        <table class="table table-dark table-hover cyber-table">
+          <thead>
+            <tr>
+              <th>Freelancer</th>
+              <th>Job Title</th>
+              <th>Skills</th>
+              <th>Cover Letter</th>
+              <th>Resume</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let app of applications">
+              <td>{{ app.freelancer?.name }}</td>
+              <td>{{ app.job?.title }}</td>
+              <td>{{ formatSkills(app.job?.skills) }}</td>
+              <td>{{ app.coverLetter }}</td>
+
+              <td>
+                <a *ngIf="app.resumeLink"
+                   [href]="buildResumeUrl(app.resumeLink)"
+                   target="_blank"
+                   class="neon-link">View</a>
+                <span *ngIf="!app.resumeLink">Not provided</span>
+              </td>
+
+              <td class="text-info">{{ app.status }}</td>
+
+              <td>
+                <button class="btn btn-success btn-sm me-2"
+                        (click)="setStatus(app.applicationId,'ACCEPTED')">
+                  Accept
+                </button>
+
+                <button class="btn btn-danger btn-sm me-2"
+                        (click)="setStatus(app.applicationId,'REJECTED')">
+                  Reject
+                </button>
+
+                <input class="form-control form-control-sm cyber-input mt-1"
+                       placeholder="Feedback"
+                       [(ngModel)]="feedbackNotes[app.applicationId]">
+
+                <button class="btn btn-sm cyber-outline mt-2"
+                        (click)="submitFeedback(app)">
+                  Send
+                </button>
+              </td>
+            </tr>
+
+            <tr *ngIf="applications.length === 0">
+              <td colspan="7" class="text-secondary">
+                No applications yet.
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success py-2 mt-3"
+           *ngIf="feedbackStatus">
+        {{ feedbackStatus }}
+      </div>
+
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="text-center py-3 cyber-footer">
+    © 2026 SkillBridge
+  </div>
+
+</div>

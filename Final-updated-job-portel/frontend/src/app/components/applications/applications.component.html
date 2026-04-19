@@ -1,0 +1,139 @@
+<div class="row g-4">
+
+  <!-- JOB LIST -->
+  <div class="col-lg-7">
+    <section class="card border-0 rounded-4 p-4 neon-glass float-card">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h5 mb-0 neon-purple">Available Jobs</h2>
+        <button class="btn btn-outline-purple btn-sm neon-outline"
+                (click)="loadJobs()">
+          Refresh
+        </button>
+      </div>
+
+      <div *ngIf="jobs.length === 0" class="text-secondary">
+        No jobs available.
+      </div>
+
+      <div class="job-card mb-3"
+           *ngFor="let job of jobs">
+
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <h6 class="mb-1 text-light fw-semibold">
+              {{ job.title }}
+            </h6>
+            <p class="small text-secondary mb-1">
+              {{ job.location }} · {{ job.employmentType }}
+            </p>
+            <p class="small text-secondary mb-0">
+              Budget: {{ job.budget }}
+            </p>
+          </div>
+
+          <button class="btn btn-purple btn-sm neon-btn"
+                  (click)="selectJob(job)"
+                  [disabled]="isApplied(job.jobId)">
+            {{ isApplied(job.jobId) ? 'Applied' : 'Apply' }}
+          </button>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- APPLY FORM -->
+  <div class="col-lg-5">
+
+    <section class="card border-0 rounded-4 p-4 neon-glass float-card">
+      <h2 class="h5 mb-3 neon-purple">
+        Apply for Job
+      </h2>
+
+      <div *ngIf="!selectedJob" class="text-secondary">
+        Select a job to apply.
+      </div>
+
+      <form [formGroup]="applicationForm"
+            *ngIf="selectedJob"
+            class="fade-in">
+
+        <div class="mb-3">
+          <label class="form-label text-light">Job</label>
+          <input class="form-control dark-input"
+                 [value]="selectedJob.title"
+                 disabled>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-light">Cover Letter</label>
+          <textarea class="form-control dark-input"
+                    rows="4"
+                    formControlName="coverLetter">
+          </textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-light">Resume</label>
+          <input type="file"
+                 class="form-control dark-input"
+                 (change)="onResumeChange($event)">
+          <div class="form-text text-secondary">
+            Upload resume (PDF / DOC)
+          </div>
+        </div>
+
+        <button type="button"
+                class="btn btn-purple w-100 neon-btn"
+                (click)="apply()">
+          Apply
+        </button>
+      </form>
+
+      <div class="alert alert-success py-2 mt-3"
+           *ngIf="output">
+        {{ output }}
+      </div>
+
+      <div class="alert alert-danger py-2 mt-3"
+           *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+    </section>
+
+    <!-- MY APPLICATIONS -->
+    <section class="card border-0 rounded-4 p-4 neon-glass float-card mt-4">
+      <h2 class="h6 mb-3 neon-purple">
+        My Applications
+      </h2>
+
+      <div *ngIf="myApplications.length === 0"
+           class="text-secondary">
+        No applications yet.
+      </div>
+
+      <div class="table-responsive"
+           *ngIf="myApplications.length > 0">
+        <table class="table table-dark table-sm fancy-table">
+          <thead>
+            <tr>
+              <th>Job</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let app of myApplications">
+              <td>{{ app.job?.title }}</td>
+              <td>
+                <span class="badge bg-info text-dark px-3">
+                  {{ app.status }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+</div>
